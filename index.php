@@ -70,7 +70,7 @@ if ($connection)
           <a class="nav-link" href="#gallery">Gallery</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Reviews</a>
+          <a class="nav-link" href="#reviews">Reviews</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#aboutus">About Us</a>
@@ -82,12 +82,26 @@ if ($connection)
     </div>
   </div>
 </nav>
+
+<!--Banner Section-->
+<div class="row mt-3 mb-3">
+  <div class="col-md-4">
+    <img src="images/Banner1.png" alt="Banner Image" class="img-fluid">
+  </div>
+  <div class="col-md-4">
+    <img src="images/Banner2.png" alt="Banner Image" class="img-fluid">
+  </div>
+  <div class="col-md-4">
+    <img src="images/The Roam Room Banner.jpg" alt="Banner Image" class="img-fluid">
+  </div>
+</div>
+
   <!--Itinerary Accordion-->
   <section id="itinerary">
     <div class="container card pt-3 pb-3 text-white" style="background-color: #430E18">
     <div class="d-flex justify-content-between align-items-center pb-2">
-      <h2 class="mb-0 ms-2">Itinerary</h2>
-      <a href="booknow" class="btn btn-primary me-1">Book Now</a>
+      <h2 class="mb-0 ms-2 fw-bold card-header">Itinerary</h2>
+      <a href="#booknow" class="btn btn-red btn-dark me-1">Book Now</a>
     </div>
   <div class="accordion" id="accordionExample">
   <div class="accordion-item">
@@ -185,8 +199,8 @@ if ($connection)
 
   <!--Book Now Form-->
     <section id="booknow">
-    <div class="card container flex-column mt-5 mb-3">
-        <h2 class="card-header form mt-2 pt-2">Book Now</h2>
+    <div class="card container flex-column mt-5 mb-3 text-white" style="background-color: #430E18">
+        <h2 class="card-header form mt-2 pt-2 fw-bold">Book Now</h2>
         <form class="card-body" action="index.php" method="POST" id="bookingForm">
         <label for="name">Name: </label>
         <input type="text" id="name" name="name" class="form-control mb-3" placeholder="Enter your name" required>
@@ -206,12 +220,13 @@ if ($connection)
         <input type="number" id="passenger" name="passenger" class="form-control mb-3" min="1" max="10" placeholder="Enter number of travelers" required>
         <label for="date">Travel Date: </label>
         <input type="date" id="date" name="date" class="form-control mb-3">
+        <label for="payment">Payment Method: </label>
         <select class="form-select mb-3" id="payment" name="payment">
           <option selected>Select a payment method</option>
           <option value="bank">Bank Transfer</option>
           <option value="poa">Pay on Arrival</option>
         </select>
-        <button type="submit" class="btn btn-primary mb-5">Submit</button>
+        <button type="submit" class="btn btn-dark btn-red mb-5">Submit</button>
         <button type="reset" class="btn btn-secondary mb-5">Reset</button>
         </form>
     </div>
@@ -219,8 +234,8 @@ if ($connection)
 
     <!--Gallery Section-->
 <section id="gallery"></section>
-  <div class="container card mt-5 mb-3 col-md-12">
-    <h2 class="mb-4">Gallery</h2>
+  <div class="container card mt-5 mb-3 col-md-12 text-white" style="background-color: #430E18">
+    <h2 class="mb-4 mt-4 fw-bold card-header">Gallery</h2>
     <div class="row">
       <!--Row 1-->
       <!--Image 1-->
@@ -330,7 +345,7 @@ if ($connection)
   
     <!--Contact Us Form-->
     <section id="contactus">
-    <div class="card container flex-column mt-5 mb-3">
+    <div class="card container flex-column mt-5 mb-3 text-white" style="background-color: #430E18">
         <h2 class="card-header form mt-2 pt-2">Contact Us</h2>
         <form class="card-body" action="index.php" method="POST">
         <label for="name">Name: </label>
@@ -340,9 +355,9 @@ if ($connection)
         <label for="subject" id="subject">Subject: </label>
         <input type="text" id="subject" name="subject" class="form-control mb-3">
         <label for="message">Message: </label>
-        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Your message here..."></textarea>
-        <button type="submit" class="btn btn-primary mb-5">Submit</button>
-        <button type="reset" class="btn btn-secondary mb-5">Reset</button>
+        <textarea class="form-control mb-3" id="message" name="message" rows="4" placeholder="Your message here..."></textarea>
+        <button type="submit" class="btn btn-dark btn-red mb-3">Submit</button>
+        <button type="reset" class="btn btn-secondary mb-3">Reset</button>
         </form>
     </div>
     </section>
