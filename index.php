@@ -217,6 +217,13 @@ if ($connection)
     </div>
     </section>
 
+    <!--Gallery Section-->
+<section id="gallery"></section>
+  <div class="container mt-5 mb-3">
+
+</div>
+</section>
+
 <!-- About Us Section -->
 <section id="aboutus">
   <div class="container card mt-5 mb-3 text-white p-4" style="background-color: #430E18">
@@ -267,5 +274,14 @@ if ($connection)
         </form>
     </div>
     </section>
+    <!--Footer-->
+  <footer class="bg-dark text-white text-center py-3">
+    <p class="mb-0">© 2023 The Roam Room. All rights reserved.</p>
+    <p class="mb-0">Follow us on:
+      <a href="#" class="text-white">Facebook</a> |
+      <a href="#" class="text-white">Instagram</a> |
+      <a href="#" class="text-white">Twitter</a>
+    </p>
+  </footer>
 </body>
 </html>
