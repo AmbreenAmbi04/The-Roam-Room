@@ -73,7 +73,7 @@ if ($connection)
           <a class="nav-link" href="#">Reviews</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
+          <a class="nav-link" href="#aboutus">About Us</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#contactus">Contact Us</a>
@@ -217,12 +217,37 @@ if ($connection)
     </div>
     </section>
 
-    <!--About Us Section-->
-    <section id="aboutus">
-      <div>
-        <h2 class="text-center mt-5">About Us</h2>
-        <p class="text-center mb-5">Welcome to The Roam Room, your ultimate travel companion! We specialize in creating unforgettable travel experiences tailored to your preferences. Whether you're looking for a relaxing beach getaway, an adventurous mountain trek, or a cultural city tour, we've got you covered. Our team of travel experts is dedicated to providing personalized service and ensuring that every detail of your trip is taken care of. Join us on a journey to explore the world's most beautiful destinations!</p>
-      </div>
+<!-- About Us Section -->
+<section id="aboutus">
+  <div class="container card mt-5 mb-3 text-white p-4" style="background-color: #430E18">
+    <h2 class="mb-4">About Us</h2>
+    <p class="lead">
+      Welcome to <strong>The Roam Room</strong> – your gateway to unforgettable adventures!
+    </p>
+    <div class="mt-4">
+      <p>
+        At <strong>The Roam Room</strong>, we believe travel is more than just visiting places – it’s about 
+        experiencing cultures, creating memories, and discovering yourself along the way. Our mission 
+        is to connect passionate travelers with breathtaking destinations, curated itineraries, 
+        and hassle-free booking services.
+      </p>
+      <p>
+        Whether you dream of wandering through ancient streets, basking on sun-kissed beaches, 
+        or exploring hidden gems off the beaten path, we’ve got you covered. From the first click 
+        on our website to the moment you return home, we ensure your journey is smooth, exciting, 
+        and uniquely yours.
+      </p>
+      <p>
+        With our trusted travel partners, competitive deals, and a love for exploration, 
+        we turn your travel dreams into reality — one adventure at a time.
+      </p>
+      <p class="fw-bold mt-4">
+        The world is waiting. Let’s roam together. 🌍✈️
+      </p>
+    </div>
+  </div>
+</section>
+
   
     <!--Contact Us Form-->
     <section id="contactus">
