@@ -44,13 +44,13 @@ if ($connection)
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <title>The Roam Room</title>
-    <link rel="icon" href="The Roam Room Logo.jpg" type="image/icon">
+    <link rel="icon" href="images/The Roam Room Logo.jpg" type="image/icon">
 </head>
 <body class="bg-black text-light">
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg bg-gradient bg-black navbar-dark fs-5">
   <div class="container-fluid">
-    <img src="The Roam Room Logo.jpg" alt="Logo" class="navbar-brand" style="width: 80px; height: 80px; border-radius: 250px">
+    <img src="images/The Roam Room Logo.jpg" alt="Logo" class="navbar-brand" style="width: 80px; height: 80px; border-radius: 250px">
     <a class="navbar-brand fs-3" href="#">The Roam Room</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,7 @@ if ($connection)
           <a class="nav-link" href="#booknow">Booking</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Gallery</a>
+          <a class="nav-link" href="#gallery">Gallery</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Reviews</a>
@@ -104,9 +104,9 @@ if ($connection)
           <li><strong>Day 2: </strong>Explore Istanbul - Hagia Sophia, Blue Mosque, Topkapi Palace</li>
           <li><strong>Day 3: </strong>Day trip to Cappadocia - Hot air balloon ride</li>
           <li><strong>Day 4: </strong>Visit Pamukkale - Thermal pools and ancient ruins</li>
-          <li><strong>Day 5: </strong>Day 5: Ephesus - Ancient city tour</li>
-          <li><strong>Day 6: </strong>Day 6: Relax at a beach resort in Antalya</li>
-          <li><strong>Day 7: </strong>Day 7: Departure from Istanbul</li>
+          <li><strong>Day 5: </strong>Ephesus - Ancient city tour</li>
+          <li><strong>Day 6: </strong>Relax at a beach resort in Antalya</li>
+          <li><strong>Day 7: </strong>Departure from Istanbul</li>
         </ul><br>
         <strong>Best Time to Visit: </strong>April–June, September–October<br>
         <strong>Starting Price: </strong>$1,200 per person (flights excluded)
@@ -196,7 +196,7 @@ if ($connection)
         <input type="tel" id="phone" name="phone" class="form-control mb-3" placeholder="Enter your phone number" required>
         <label for="subject" id="subject">Travel Destination: </label>
         <select class="form-select mb-3" id="destination" name="destination" required>
-          <option value=0>Select a destination</option>
+          <option selected>Select a destination</option>
           <option value="turkey">Turkey</option>
           <option value="thailand">Italy</option>
           <option value="france">France</option>
@@ -207,7 +207,7 @@ if ($connection)
         <label for="date">Travel Date: </label>
         <input type="date" id="date" name="date" class="form-control mb-3">
         <select class="form-select mb-3" id="payment" name="payment">
-          <option value=0>Select a payment method</option>
+          <option selected>Select a payment method</option>
           <option value="bank">Bank Transfer</option>
           <option value="poa">Pay on Arrival</option>
         </select>
@@ -219,8 +219,80 @@ if ($connection)
 
     <!--Gallery Section-->
 <section id="gallery"></section>
-  <div class="container mt-5 mb-3">
-
+  <div class="container card mt-5 mb-3 col-md-12">
+    <h2 class="mb-4">Gallery</h2>
+    <div class="row">
+      <!--Row 1-->
+      <!--Image 1-->
+      <div class="col-md-4 mb-3">
+        <img src="images/hagia-sofia.jpeg" class="img-fluid rounded" alt="Hagia Sophia" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Hagia Sophia, Istanbul</p>
+      </div>
+      <!--Image 2-->
+      <div class="col-md-4 mb-3">
+        <img src="images/cappadocia.jpg" class="img-fluid rounded" alt="Cappadocia" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Cappadocia, Turkey</p>
+      </div>
+      <!--Image 3-->
+      <div class="col-md-4 mb-3">
+        <img src="images/hagia.png" class="img-fluid rounded" alt="Hagia Sophia Interior" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Hagia Sophia Interior, Istanbul</p>
+      </div>
+    </div>
+      <!--Row 2-->
+      <!--Image 1-->
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <img src="images/rome.jpg" class="img-fluid rounded" alt="Rome" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Colosseum, Rome</p>
+      </div>
+      <!--Image 2-->
+      <div class="col-md-4 mb-3">
+        <img src="images/vatican.jpg" class="img-fluid rounded" alt="Vatican City" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Vatican City, Italy</p>
+      </div>
+      <!--Image 3-->
+      <div class="col-md-4 mb-3">
+        <img src="images/tuscany.jpg" class="img-fluid rounded" alt="Tuscany" style="height:300px; width:100%; object-fit:cover;">
+      <p class="image-caption text-center mt-2 fs-5">Tuscany Wine Tasting, Italy</p>
+      </div>
+    </div>
+      <!--Row 3-->
+      <!--Image 1-->
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <img src="images/paris.jpg" class="img-fluid rounded" alt="Eifel Tower, Paris" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Eifel Tower, Paris</p>
+      </div>
+      <!--Image 2-->
+      <div class="col-md-4 mb-3">
+        <img src="images/louvre.jpg" class="img-fluid rounded" alt="Louvre Museum" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Louvre Museum, France</p>
+      </div>
+      <!--Image 3-->
+      <div class="col-md-4 mb-3">
+        <img src="images/seine.jpg" class="img-fluid rounded" alt="Seine River Cruise" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Seine River Cruise, France</p>
+      </div>
+    </div>
+    <!--Row 4-->
+      <!--Image 1-->
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <img src="images/ubud.jpg" class="img-fluid rounded" alt="Ubud" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Ubud, Bali</p>
+      </div>
+      <!--Image 2-->
+      <div class="col-md-4 mb-3">
+        <img src="images/mount-batur.jpg" class="img-fluid rounded" alt="Mount Batur" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Mount Batur, Bali</p>
+      </div>
+      <!--Image 3-->
+      <div class="col-md-4 mb-3">
+        <img src="images/denpasar.jpg" class="img-fluid rounded" alt="Denpasar" style="height:300px; width:100%; object-fit:cover;">
+        <p class="image-caption text-center mt-2 fs-5">Denpasar, Bali</p>
+      </div>
+    </div>
 </div>
 </section>
 
