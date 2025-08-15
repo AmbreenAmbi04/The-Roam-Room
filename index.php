@@ -48,9 +48,9 @@ if ($connection)
 </head>
 <body class="bg-black text-light">
   <!--Navbar-->
-  <nav class="navbar navbar-expand-lg bg-gradient bg-black navbar-dark fs-5">
+  <nav class="navbar navbar-expand-lg bg-gradient bg-black navbar-dark fs-5 sticky-top">
   <div class="container-fluid">
-    <img src="images/The Roam Room Logo.jpg" alt="Logo" class="navbar-brand" style="width: 80px; height: 80px; border-radius: 250px">
+    <img src="images/The Roam Room Logo.jpg" alt="Logo" class="navbar-brand" style="width: 60px; height: 60px; border-radius: 250px">
     <a class="navbar-brand fs-3" href="#">The Roam Room</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -346,6 +346,50 @@ if ($connection)
         </form>
     </div>
     </section>
+
+    <!--Reviews Section-->
+    <section id="reviews">
+    <div class="container card mt-5 mb-3 text-white p-4" style="background-color: #430E18">
+      <h2 class="mb-4">Reviews</h2>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card bg-dark text-white">
+            <div class="card-body">
+              <h5 class="card-title">John Doe</h5>
+              <p class="card-text">"The Roam Room made my trip to Turkey unforgettable! The itinerary was well-planned and the customer service was exceptional."</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card bg-dark text-white">
+            <div class="card-body">
+              <h5 class="card-title">Jane Smith</h5>
+              <p class="card-text">"I had an amazing experience booking my trip to Italy. The team was very helpful and the accommodations were top-notch!"</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card bg-dark text-white">
+            <div class="card-body">
+              <h5 class="card-title">Alice Johnson</h5>
+              <p class="card-text">"Bali was a dream come true! The Roam Room provided excellent recommendations for activities and the hotel was perfect."</p>
+            </div>  
+          </div>
+        </div>
+      </div>
+      <div>
+          <h5 class="mb-3">Leave a Review</h5>
+          <div class="mb-3">
+            <form id="reviewForm" class="form">
+            <label for="reviewerName" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="reviewerName" required>
+            <label for="reviewText" class="form-label">Your Review</label>
+            <textarea class="form-control" id="reviewText" rows="3" required></textarea>
+            <button type="submit" class="btn btn-primary mt-2">Submit Review</button>
+        </form>
+        </div>
+      </div>
+</section>
     <!--Footer-->
   <footer class="bg-dark text-white text-center py-3">
     <p class="mb-0">© 2023 The Roam Room. All rights reserved.</p>
