@@ -9,13 +9,13 @@ $connection = new mysqli ($server_name, $username, $password, $db_name);
 //Contact Us Form Submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-$name= $_POST["name"];
-$email = $_POST["email"];
-$subject = $_POST["subject"];
-$message = $_POST["message"];
-
 if ($connection)
 {
+  if (isset($_POST['form_type']) && $_POST['form_type'] == 'contact') {
+    $name= $_POST["name"];
+    $email = $_POST["email"];
+    $subject = $_POST["subject"];
+    $message = $_POST["message"];
     if (!empty($name) && !empty($email) && !empty($subject) && !empty($message))
     {
         $stmt = $connection->prepare("INSERT INTO tbl_contactus(name, email, subject, message) VALUES (?, ?, ?, ?)");
@@ -32,6 +32,45 @@ if ($connection)
             echo "<script>alert('Error sending message. Please try again.');</script>";
         }
     }
+  }
+  elseif (isset($_POST['form_type']) && $_POST['form_type'] == 'booking') {
+    $bookname = $_POST["bookname"];
+    $bookemail = $_POST["bookemail"];
+    $destination = $_POST["destination"];
+    $passenger = $_POST["passenger"];
+    $date = $_POST["date"];
+    $payment = $_POST["payment"];
+
+    if (!empty($bookname) && !empty($bookemail) && !empty($destination) && !empty($passenger) && !empty($date) && !empty($payment)) {
+        $stmt = $connection->prepare("INSERT INTO tbl_booking(bookname, bookemail, destination, passenger, date, payment) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $bookname, $bookemail, $destination, $passenger, $date, $payment);
+        if ($stmt->execute()) {
+            //Redirect to avoid duplicate submissions
+            header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
+            exit;
+            echo "<script>alert('Booking submitted successfully!');</script>";
+        } else {
+            echo "<script>alert('Error submitting booking. Please try again.');</script>";
+        }
+    }
+  }
+  elseif (isset($_POST['form_type']) && $_POST['form_type'] == 'review') {
+    $reviewerName = $_POST["reviewerName"];
+    $reviewText = $_POST["reviewText"];
+
+    if (!empty($reviewerName) && !empty($reviewText)) {
+        $stmt = $connection->prepare("INSERT INTO tbl_reviews(reviewerName, reviewText) VALUES (?, ?)");
+        $stmt->bind_param("ss", $reviewerName, $reviewText);
+        if ($stmt->execute()) {
+            //Redirect to avoid duplicate submissions
+            header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
+            exit;
+            echo "<script>alert('Review submitted successfully!');</script>";
+        } else {
+            echo "<script>alert('Error submitting review. Please try again.');</script>";
+        }
+    }
+  }
 }
 }
 ?>
@@ -202,19 +241,20 @@ if ($connection)
     <div class="card container flex-column mt-5 mb-3 text-white" style="background-color: #430E18">
         <h2 class="card-header form mt-2 pt-2 fw-bold">Book Now</h2>
         <form class="card-body" action="index.php" method="POST" id="bookingForm">
-        <label for="name">Name: </label>
-        <input type="text" id="name" name="name" class="form-control mb-3" placeholder="Enter your name" required>
-        <label for="email">Email: </label>
-        <input type="email" id="email" name="email" class="form-control mb-3" placeholder="Enter your email" required>
+        <input type="hidden" name="form_type" value="booking">
+        <label for="bookname">Name: </label>
+        <input type="text" id="bookname" name="bookname" class="form-control mb-3" placeholder="Enter your name" required>
+        <label for="bookemail">Email: </label>
+        <input type="email" id="bookemail" name="bookemail" class="form-control mb-3" placeholder="Enter your email" required>
         <label for="email">Phone Number: </label>
         <input type="tel" id="phone" name="phone" class="form-control mb-3" placeholder="Enter your phone number" required>
         <label for="subject" id="subject">Travel Destination: </label>
         <select class="form-select mb-3" id="destination" name="destination" required>
           <option selected>Select a destination</option>
-          <option value="turkey">Turkey</option>
-          <option value="thailand">Italy</option>
-          <option value="france">France</option>
-          <option value="bali">Bali</option>
+          <option value="Turkey">Turkey</option>
+          <option value="Thailand">Italy</option>
+          <option value="France">France</option>
+          <option value="Bali">Bali</option>
         </select>
         <label for="passenger">Number of Travelers: </label>
         <input type="number" id="passenger" name="passenger" class="form-control mb-3" min="1" max="10" placeholder="Enter number of travelers" required>
@@ -223,8 +263,8 @@ if ($connection)
         <label for="payment">Payment Method: </label>
         <select class="form-select mb-3" id="payment" name="payment">
           <option selected>Select a payment method</option>
-          <option value="bank">Bank Transfer</option>
-          <option value="poa">Pay on Arrival</option>
+          <option value="Bank Transfer">Bank Transfer</option>
+          <option value="Pay on Arrival">Pay on Arrival</option>
         </select>
         <button type="submit" class="btn btn-dark btn-red mb-5">Submit</button>
         <button type="reset" class="btn btn-secondary mb-5">Reset</button>
@@ -348,6 +388,7 @@ if ($connection)
     <div class="card container flex-column mt-5 mb-3 text-white" style="background-color: #430E18">
         <h2 class="card-header form mt-2 pt-2">Contact Us</h2>
         <form class="card-body" action="index.php" method="POST">
+        <input type="hidden" name="form_type" value="contact">
         <label for="name">Name: </label>
         <input type="text" id="name" name="name" class="form-control mb-3">
         <label for="email">Email: </label>
@@ -395,12 +436,13 @@ if ($connection)
       <div>
           <h5 class="mb-3">Leave a Review</h5>
           <div class="mb-3">
-            <form id="reviewForm" class="form">
+            <form id="reviewForm" class="form" action="index.php" method="POST">
+            <input type="hidden" name="form_type" value="review">
             <label for="reviewerName" class="form-label">Your Name</label>
-            <input type="text" class="form-control" id="reviewerName" required>
+            <input type="text" class="form-control" id="reviewerName" name="reviewerName" required>
             <label for="reviewText" class="form-label">Your Review</label>
-            <textarea class="form-control" id="reviewText" rows="3" required></textarea>
-            <button type="submit" class="btn btn-primary mt-2">Submit Review</button>
+            <textarea class="form-control" id="reviewText" name="reviewText" rows="3" required></textarea>
+            <button type="submit" class="btn btn-dark btn-red mt-2">Submit Review</button>
         </form>
         </div>
       </div>
