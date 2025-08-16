@@ -2,78 +2,39 @@
 $server_name = "localhost";
 $username = "root";
 $password = "";
-$db_name= "db_practice";
+$db_name= "db_theroamroom";
 
 $connection = new mysqli ($server_name, $username, $password, $db_name);
 
-//Contact Us Form Submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $toast = "";
 
-if ($connection)
-{
-  if (isset($_POST['form_type']) && $_POST['form_type'] == 'contact') {
-    $name= $_POST["name"];
-    $email = $_POST["email"];
-    $subject = $_POST["subject"];
-    $message = $_POST["message"];
-    if (!empty($name) && !empty($email) && !empty($subject) && !empty($message))
-    {
+  if (!$connection->connect_error) {
+    if ($_POST['form_type'] == 'contact') {
         $stmt = $connection->prepare("INSERT INTO tbl_contactus(name, email, subject, message) VALUES (?, ?, ?, ?)");
-        $stmt->bind_param("ssss", $name, $email, $subject, $message);
-        if ($stmt->execute())
-        {
-            //Redirect to avoid duplicate submissions
-            header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
-            exit;
-            echo "<script>alert('Message sent successfully!');</script>";
-        }
-        else
-        {
-            echo "<script>alert('Error sending message. Please try again.');</script>";
-        }
+        $stmt->bind_param("ssss", $_POST["name"], $_POST["email"], $_POST["subject"], $_POST["message"]);
+        $toast = $stmt->execute() ? "contact_success" : "contact_error";
     }
-  }
-  elseif (isset($_POST['form_type']) && $_POST['form_type'] == 'booking') {
-    $bookname = $_POST["bookname"];
-    $bookemail = $_POST["bookemail"];
-    $destination = $_POST["destination"];
-    $passenger = $_POST["passenger"];
-    $date = $_POST["date"];
-    $payment = $_POST["payment"];
-
-    if (!empty($bookname) && !empty($bookemail) && !empty($destination) && !empty($passenger) && !empty($date) && !empty($payment)) {
+    elseif ($_POST['form_type'] == 'booking') {
         $stmt = $connection->prepare("INSERT INTO tbl_booking(bookname, bookemail, destination, passenger, date, payment) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $bookname, $bookemail, $destination, $passenger, $date, $payment);
-        if ($stmt->execute()) {
-            //Redirect to avoid duplicate submissions
-            header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
-            exit;
-            echo "<script>alert('Booking submitted successfully!');</script>";
-        } else {
-            echo "<script>alert('Error submitting booking. Please try again.');</script>";
-        }
+        $stmt->bind_param("ssssss", $_POST["bookname"], $_POST["bookemail"], $_POST["destination"], $_POST["passenger"], $_POST["date"], $_POST["payment"]);
+        $toast = $stmt->execute() ? "booking_success" : "booking_error";
     }
-  }
-  elseif (isset($_POST['form_type']) && $_POST['form_type'] == 'review') {
-    $reviewerName = $_POST["reviewerName"];
-    $reviewText = $_POST["reviewText"];
-
-    if (!empty($reviewerName) && !empty($reviewText)) {
+    elseif ($_POST['form_type'] == 'review') {
         $stmt = $connection->prepare("INSERT INTO tbl_reviews(reviewerName, reviewText) VALUES (?, ?)");
-        $stmt->bind_param("ss", $reviewerName, $reviewText);
-        if ($stmt->execute()) {
-            //Redirect to avoid duplicate submissions
-            header("Location: " . $_SERVER['PHP_SELF'] . "?success=1");
-            exit;
-            echo "<script>alert('Review submitted successfully!');</script>";
-        } else {
-            echo "<script>alert('Error submitting review. Please try again.');</script>";
-        }
+        $stmt->bind_param("ss", $_POST["reviewerName"], $_POST["reviewText"]);
+        $toast = $stmt->execute() ? "review_success" : "review_error";
     }
+  } else {
+      $toast = "db_error";
   }
-}
+
+  // Redirect to avoid resubmission
+  header("Location: " . $_SERVER['PHP_SELF'] . "?toast=" . $toast);
+  exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,6 +45,9 @@ if ($connection)
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <title>The Roam Room</title>
     <link rel="icon" href="images/The Roam Room Logo.jpg" type="image/icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body class="bg-black text-light">
   <!--Navbar-->
@@ -456,5 +420,45 @@ if ($connection)
       <a href="#" class="text-white">Twitter</a>
     </p>
   </footer>
+
+  <!-- Toast Notification -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
+  <div id="successToast" class="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">✅ Submitted successfully!</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+
+  <div id="errorToast" class="toast text-bg-danger" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">❌ Something went wrong!</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const toastType = urlParams.get("toast");
+
+  if (toastType) {
+    let toastEl = null;
+
+    if (toastType.includes("success")) {
+      toastEl = document.getElementById("successToast");
+    } else {
+      toastEl = document.getElementById("errorToast");
+    }
+
+    if (toastEl) {
+      const toast = new bootstrap.Toast(toastEl);
+      toast.show();
+    }
+  }
+});
+</script>
+
 </body>
 </html>
